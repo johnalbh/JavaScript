@@ -47,17 +47,26 @@
     const pokemon = {
       $container: document.querySelector('#container'),
       renderName: function(name) {
-        this.$container.textContent = `Pokemon encontrado ${name}`
+        this.$container.textContent = `Super Heroe encontrado ${name}`
        },
       renderType: function(type) {
         this.$container.textContent = `Es de tipo ${type}`
        }
     }
 
-    pokemon.renderName('Pichachu');
-    const renderName2 = pokemon.renderName;
-    const x = renderName2.apply(pokemon, ['Prueba2']);
+    pokemon.renderName('Iron Man');
+
+    //Using Bind
+    const renderNameBind = pokemon.renderName;
+    const x = renderNameBind.apply(pokemon, ['Capitan America']);
     
+    //Using Call
+    const renderNameCall = pokemon.renderName;
+    const y = renderNameCall.call(pokemon, 'Hulk')
+
+    //Using apply
+    const renderNameApply = pokemon.renderName;
+    const z = renderNameApply.apply(pokemon, ['Thor'])
 
   </script>
 </body>
