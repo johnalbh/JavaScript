@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this</title>
+  <style>
+    body {
+      background: #f6df1d;
+      font-family: system-ui;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    .container {
+      color: #e90063;
+      font-size: 2.8em;
+    }
+  </style>
+</head>
+<body>
+  <h1>This es el objeto contexto de JavaScript en el cual se está ejecutando el código actual.</h1>
+  <h3>Windows es el objeto contexto de JavaScript</h3>
+  <h1 id="container" class="container"></h1>
+
+  <script>
+    // const $container = document.querySelector('#container')
+    // function renderName(name) {
+    //   $container.textContent = `Pokemon encontrado ${name}`
+    // }
+    // function renderType(type) {
+    //   console.log('This', this);
+    //   $container.textContent = `Es de tipo ${type}`
+    // }
+    // console.log('This', this);
+    // // renderName('Pikachu')
+    // renderType('Electric')
+
+    // ¿Dónde estoy ejecutando mi código? #CONTEXTO
+
+    // this en Node
+    // this en el Browser
+
+    const pokemon = {
+      $container: document.querySelector('#container'),
+      renderName: function(name) {
+        this.$container.textContent = `Pokemon encontrado ${name}`
+       },
+      renderType: function(type) {
+        this.$container.textContent = `Es de tipo ${type}`
+       }
+    }
+
+    pokemon.renderName('Pichachu');
+    const renderName2 = pokemon.renderName;
+    const x = renderName2.apply(pokemon, ['Prueba2']);
+    
+
+  </script>
+</body>
+</html>
