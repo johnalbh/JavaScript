@@ -89,20 +89,25 @@
       $container.textContent = `Super Heroe encontrado ${data.name}`
     })
 
-    class SuperHeroe {
+    class SuperHeroe extends API {
+      constructor(characterId) {
+      super(characterId)
+      this.characterId = characterId
+      }
       $container = document.querySelector('#container');
-      renderName(name) {
-        this.$container.textContent = `Super Heroe encontrado ${name}`
+      renderName() {
+        this.$container.textContent = `Super Heroe encontrado ${this.superHeroeMarvel.name}`
       };
-      renderType(type) {
-        this.$container.textContent = `Es de tipo ${type}`
+      renderType() {
+        this.$container.textContent = `Es de tipo ${this.superHeroeMarvel.description}`
       }
     }
 
-    // const superHeroe = new SuperHeroe(1011334);
-    // superHeroe.fetch().then( () => {
-    //   superHeroe.renderName()
-    // })
+    const superHeroe = new SuperHeroe(1009144);
+    superHeroe.fetch().then( () => {
+      superHeroe.renderName()
+      superHeroe.renderType()
+    })
 
   </script>
 </body>
