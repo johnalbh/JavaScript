@@ -56,17 +56,48 @@
 
     pokemon.renderName('Iron Man');
 
-    //Using Bind
-    const renderNameBind = pokemon.renderName;
-    const x = renderNameBind.apply(pokemon, ['Capitan America']);
+    // //Using Bind
+    // const renderNameBind = pokemon.renderName;
+    // const x = renderNameBind.apply(pokemon, ['Capitan America']);
     
-    //Using Call
-    const renderNameCall = pokemon.renderName;
-    const y = renderNameCall.call(pokemon, 'Hulk')
+    // //Using Call
+    // const renderNameCall = pokemon.renderName;
+    // const y = renderNameCall.call(pokemon, 'Hulk')
 
-    //Using apply
-    const renderNameApply = pokemon.renderName;
-    const z = renderNameApply.apply(pokemon, ['Thor'])
+    // //Using apply
+    // const renderNameApply = pokemon.renderName;
+    // const z = renderNameApply.apply(pokemon, ['Thor'])
+
+    class API{
+      BASE_URL = ``
+      async fetch(characterId){
+        const response = await fetch(`https://gateway.marvel.com:443/v1/public/characters/${characterId}?ts=1&apikey=852a8136c9f20bd8f404e19e41fabc32&hash=5c6b9392740cac047fba17ff01b37b0f`)
+        const superHeroe = await response.json();
+        this.superHeroe = superHeroe
+        return superHeroe
+      }
+    }
+
+    const api = new API
+    api.fetch(1011334).then(({data}) => {
+        const { results } = data;
+        const {name } = results[0];
+        console.log(name);
+        $container.textContent = `Super Heroe encontrado ${name}`
+    })
+
+    class SuperHeroe {
+      $container =  document.querySelector('#container');
+      renderName (name) {
+        this.$container.textContent = `Super Heroe encontrado ${name}`
+       };
+      renderType(type) {
+        this.$container.textContent = `Es de tipo ${type}`
+       }
+    }
+
+    // const viudaNegra = new SuperHeroe;
+    // viudaNegra.renderName('Viuda Negra')
 
   </script>
 </body>
