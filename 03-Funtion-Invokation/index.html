@@ -16,11 +16,74 @@
 
   <script>
 
+    //hello ('word' es a function: hello expression evaluates to a function object, followed by a pair of parenthesis with the 'Words' argument.
     function hello(name) {
       return alert(`Hello ${name}`);
     }
 
+    //IIE (Immediately-invoked function expression)
+    const messahe = (function(name){
+      return alert(`Hello ${name}`);
+    })('John');
+
+
+    //Context in the following function:
+    function sum(a,b){
+      console.log(this === window); // => true
+      this.myNumber = 20; // add 'myNumber property to global object
+      return a + b;
+    }
+
+    // sum() us invoked function
+    // this in sum() is the global object (windows)
+    sum(15, 16) // => 31;
+    console.log(window.myNumber); // => 20;
     const message = hello('World');
+
+
+    //Pitfall. This in an inner function.
+    const numbers = {
+      numberA: 5,
+      numberB: 10,
+
+      sum: function(){
+        console.log(this === numbers); // => true;
+        function add(){
+          //this is window or undefined in stric mode
+          console.log(this == numbers);
+          return this.numberA + this.numberB;
+        }
+        return add();
+      },
+
+      sum1: function(){
+        console.log(this === numbers); // => true;
+        function add(){
+          //this is window or undefined in stric mode
+          console.log(this == numbers);
+          return this.numberA + this.numberB;
+        }
+        return add.call(this);
+      },
+
+      sum2: function(){
+        console.log(this === numbers); // => true;
+        const add = () => {
+          //this is window or undefined in stric mode
+          console.log(this == numbers);
+          return this.numberA + this.numberB;
+        }
+        return add.call(this);
+      }
+    };
+
+    
+    numbers.sum(); // => false
+    numbers.sum1(); // =>  true
+    numbers.sum2(); // => true
+
+
+
   </script>
 </body>
 
