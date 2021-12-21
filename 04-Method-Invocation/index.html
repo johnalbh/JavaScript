@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this</title>
+
+</head>
+
+<body>
+  <h1>This es el objeto contexto de JavaScript en el cual se está ejecutando el código actual.</h1>
+  <h3>Windows es el objeto contexto de JavaScript</h3>
+  <h1 id="container" class="container"></h1>
+
+  <script>
+
+    const myObject = {
+      //helloMethod is a method
+      helloMethod: function(){
+        return 'Hello World';
+      }
+    }
+
+    const message = myObject.helloMethod();
+
+
+    const words = ['Hello', 'World'];
+    words.join(', '); //method invocation
+
+    const obj = {
+      myMethod(){
+        return new Date().toString();
+      }
+    }
+    obj.myMethod(); //method invocation
+
+    const func = obj.myMethod;
+    func();             //function Invocation
+    parseFloat('16.6'); //function invocation
+    isNaN(0);           //function invocation
+    
+    console.log(message);
+    console.log(words);
+    console.log(obj.myMethod());
+
+    console.log(func());
+  </script>
+</body>
+
+</html>
